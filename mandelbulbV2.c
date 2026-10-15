@@ -1,6 +1,8 @@
 /* ============================================================================
  *  mandelbulbV2.c
- *
+ *  compile command: gcc -O3 -mavx512f -mavx512dq -mavx512bw -mavx512vl -ffast-math -DUSE_OPENCL \
+    -o mandelbulbV2.exe mandelbulbV2.c mandelbulb_oclV2.c \
+    -lpng -lz -lOpenCL -lm
  *  V2 with: SSAA, soft shadows, improved AO, depth of field,
  *           palettes, AVX-512 (auto-detected via __AVX512F__), adaptive
  *           step count, Newton-Raphson refinement, DE safety factor,
