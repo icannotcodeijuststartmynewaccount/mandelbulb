@@ -1,12 +1,28 @@
 /* ============================================================================
  *  mandelbulbV2.c
- *  compile command: gcc -O3 -mavx512f -mavx512dq -mavx512bw -mavx512vl -ffast-math -DUSE_OPENCL \
-    -o mandelbulbV2.exe mandelbulbV2.c mandelbulb_oclV2.c \
-    -lpng -lz -lOpenCL -lm
- *  V2 with: SSAA, soft shadows, improved AO,
- *           palettes, AVX-512 (auto-detected via __AVX512F__), adaptive
- *           step count, Newton-Raphson refinement, DE safety factor,
- *           fixed path logging, optional light direction.
+ *
+ *  Compile (MinGW-w64 GCC / MSYS2):
+ *      gcc -O3 -mavx512f -mavx512dq -mavx512bw -mavx512vl -ffast-math \
+ *          -DUSE_OPENCL -o mandelbulbV2.exe \
+ *          mandelbulbV2.c mandelbulb_oclV2.c \
+ *          -lpng -lz -lOpenCL -lm
+ *
+ *  Compile without OpenCL (CPU only):
+ *      gcc -O3 -mavx512f -mavx512dq -mavx512bw -mavx512vl -ffast-math \
+ *          -o mandelbulbV2.exe mandelbulbV2.c \
+ *          -lpng -lz -lm
+ *
+ *  Compile without AVX-512 (for older CPUs):
+ *      gcc -O3 -mavx2 -mfma -ffast-math -DUSE_OPENCL \
+ *          -o mandelbulbV2.exe mandelbulbV2.c mandelbulb_oclV2.c \
+ *          -lpng -lz -lOpenCL -lm
+ *
+ *  Requires: libpng, OpenCL (optional), GCC with AVX-512 support
+ *
+ *  Features: SSAA, soft shadows, improved AO, palettes,
+ *            AVX-512 (auto-detected), adaptive step count,
+ *            Newton-Raphson refinement, DE safety factor.
+ *  DoF is present but broken (see issues).
  * ==========================================================================*/
 
 #define WIN32_LEAN_AND_MEAN
